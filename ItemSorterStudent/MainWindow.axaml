@@ -1,0 +1,41 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:ItemSorterStudent"
+        x:Class="ItemSorterStudent.MainWindow"
+        x:DataType="local:MainWindow"
+        Title="Item Sorter (Week 7) — Student"
+        Width="920" Height="620">
+
+    <StackPanel Margin="8" Spacing="6">
+
+        <TextBlock FontSize="18" Text="Item Sorter Robot (Week 7)" />
+
+        <!-- Log/Status -->
+        <TextBox x:Name="LogBox"
+                 IsReadOnly="True"
+                 AcceptsReturn="True"
+                 Height="140"
+                 Text="Ready..." />
+
+        <!-- VIGTIGT: Rigtig Grid-starttag -->
+        <Grid ColumnDefinitions="*,*"
+              RowDefinitions="Auto,*,Auto"
+              Margin="0,6,0,0">
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Queued Orders" FontWeight="Bold" />
+            <TextBlock Grid.Row="0" Grid.Column="1" Text="Processed Orders" FontWeight="Bold" />
+
+            <DataGrid Grid.Row="1" Grid.Column="0" Height="260"
+                      ItemsSource="{Binding OrderBook.QueuedOrders}" />
+            <DataGrid Grid.Row="1" Grid.Column="1" Height="260"
+                      ItemsSource="{Binding OrderBook.ProcessedOrders}" />
+
+            <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" Spacing="8">
+                <Button Click="ProcessNextButton_OnClick">Process next order</Button>
+                <Button Click="SeedButton_OnClick">Seed demo data</Button>
+                <TextBlock VerticalAlignment="Center" Margin="12,0,0,0" Text="{Binding Status}" />
+            </StackPanel>
+
+        </Grid>
+    </StackPanel>
+</Window>
